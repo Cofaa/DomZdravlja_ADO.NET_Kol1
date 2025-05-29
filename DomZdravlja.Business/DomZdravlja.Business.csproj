@@ -44,6 +44,7 @@
     <Compile Include="IzvestajManager.cs" />
     <Compile Include="SluzbaManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZaposleniMenager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomZdravlha.Shared\DomZdravlja.Shared.csproj">

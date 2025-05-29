@@ -79,44 +79,35 @@ namespace DomZdravlja.DataAccess
             }
         }
 
-        public void UpdateIzvestaj(IzvestajDTO izvestaj) 
+        public void UpdateIzvestaj(IzvestajDTO izvestaj)
         {
-            using (SqlConnection con = new SqlConnection(_connString))
-            {
-                con.Open();
-
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.Connection = con;
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = @"UPDATE tblIzvestaj
-                                        SET NazivIzvestaja = @NazivIzvestaja,
-                                            BrojPacijenata = @BrojPacijenata,
-                                            DatumKreiranja = @DatumKreiranja
-                                        WHERE IzvestajID = @IzvestajID";
-
-                    cmd.Parameters.AddWithValue("@NazivIzvestaja", izvestaj.NazivIzvestaja);
-                    cmd.Parameters.AddWithValue("@BrojPacijenata", izvestaj.BrojPacijenata);
-                    cmd.Parameters.AddWithValue("DatumKreiranja", izvestaj.DatumKreiranja);
-                    cmd.Parameters.AddWithValue("@IzvestajID", izvestaj.IzvestajID);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public void DeleteIzvestaj(int IzvestajID)
-        {
-            using(SqlConnection conn = new SqlConnection(_connString))
+            using (SqlConnection conn = new SqlConnection(_connString)) 
             {
                 conn.Open();
-                string sql = "DELETE FROM tblIzvestaj WHERE IzvestajID = @IzvestajID";
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@IzvestajID", IzvestajID);
+                SqlCommand cmd = new SqlCommand("sp_IzmeniIzvestaj", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@IzvestajID", izvestaj.IzvestajID);
+                cmd.Parameters.AddWithValue("@NazivIzvestaja", izvestaj.NazivIzvestaja);
+                cmd.Parameters.AddWithValue("@BrojPacijenata", izvestaj.BrojPacijenata);
+                cmd.Parameters.AddWithValue("@DatumKreiranja", izvestaj.DatumKreiranja);
+
                 cmd.ExecuteNonQuery();
             }
         }
 
+        public void DeleteIzvestaj(int izvestajID)
+        {
+            using (SqlConnection conn = new SqlConnection(_connString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("sp_ObrisiIzvestaj", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@IzvestajID", izvestajID);
+                cmd.ExecuteNonQuery();
+            }
+        }
         public List<IzvestajDTO> GetIzvestajiBySluzba(int sluzbaID)
         {
             throw new NotImplementedException();

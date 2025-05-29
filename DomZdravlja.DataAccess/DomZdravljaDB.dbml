@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DomZdravljaDB" Class="DomZdravljaDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=DomZdravljaDB;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="DomZdravlja.DataAccess.Properties.Settings" SettingsPropertyName="DomZdravljaDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tblIzvestaj" Member="tblIzvestajs">
+    <Type Name="tblIzvestaj">
+      <Column Name="IzvestajID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SluzbaID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NazivIzvestaja" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="BrojPacijenata" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DatumKreiranja" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="tblSluzba_tblIzvestaj" Member="tblSluzba" ThisKey="SluzbaID" OtherKey="SluzbaID" Type="tblSluzba" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblSluzba" Member="tblSluzbas">
+    <Type Name="tblSluzba">
+      <Column Name="SluzbaID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NazivSluzbe" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="OpisSluzbe" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="DatumOsnivanja" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="tblSluzba_tblIzvestaj" Member="tblIzvestajs" ThisKey="SluzbaID" OtherKey="SluzbaID" Type="tblIzvestaj" />
+      <Association Name="tblSluzba_Zaposleni" Member="Zaposlenis" ThisKey="SluzbaID" OtherKey="SluzbaId" Type="Zaposleni" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Zaposleni" Member="Zaposlenis">
+    <Type Name="Zaposleni">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ime" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Prezime" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DatumZaposlenja" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="SluzbaId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="tblSluzba_Zaposleni" Member="tblSluzba" ThisKey="SluzbaId" OtherKey="SluzbaID" Type="tblSluzba" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+</Database>

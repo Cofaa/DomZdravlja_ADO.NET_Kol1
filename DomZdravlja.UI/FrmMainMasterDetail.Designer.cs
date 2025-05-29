@@ -36,6 +36,7 @@
             this.Edit = new System.Windows.Forms.Button();
             this.txtOpisSluzbe = new System.Windows.Forms.TextBox();
             this.dtpDatumOsnivanja = new System.Windows.Forms.DateTimePicker();
+            this.btnOuterJoin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvIzvestaji)).BeginInit();
             this.SuspendLayout();
             // 
@@ -111,11 +112,22 @@
             this.dtpDatumOsnivanja.Size = new System.Drawing.Size(200, 20);
             this.dtpDatumOsnivanja.TabIndex = 9;
             // 
+            // btnOuterJoin
+            // 
+            this.btnOuterJoin.Location = new System.Drawing.Point(404, 547);
+            this.btnOuterJoin.Name = "btnOuterJoin";
+            this.btnOuterJoin.Size = new System.Drawing.Size(120, 37);
+            this.btnOuterJoin.TabIndex = 10;
+            this.btnOuterJoin.Text = "Prikazi Zaposlene";
+            this.btnOuterJoin.UseVisualStyleBackColor = true;
+            this.btnOuterJoin.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FrmMainMasterDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(937, 596);
+            this.Controls.Add(this.btnOuterJoin);
             this.Controls.Add(this.dtpDatumOsnivanja);
             this.Controls.Add(this.txtOpisSluzbe);
             this.Controls.Add(this.Edit);
@@ -144,6 +156,7 @@
         private System.Windows.Forms.Button Edit;
         private System.Windows.Forms.TextBox txtOpisSluzbe;
         private System.Windows.Forms.DateTimePicker dtpDatumOsnivanja;
+        private System.Windows.Forms.Button btnOuterJoin;
     }
 }
 

@@ -80,14 +80,14 @@ namespace DomZdravlja.UI
             var sluzbaDTO = cmbSluzba.SelectedItem as SluzbaDTO;
             if (sluzbaDTO == null) return;
 
-            // Otvaramo formu za unos novog Izvestaja
-            var frm = new FrmIzvestajEdit(sluzbaDTO.SluzbaID);
+            // Otvaramo formu za unos novog Izvestaja  
+            var frm = new FrmIzvestajEdit(sluzbaDTO.SluzbaID); // Pass SluzbaID to the constructor  
+
             if (frm.ShowDialog() == DialogResult.OK)
             {
-                // Ponovo učitavamo izveštaje
+                // Ponovo učitavamo izveštaje  
                 UcitajIzvestaje(sluzbaDTO.SluzbaID);
             }
-
         }
 
         private void Izmeni_Click(object sender, EventArgs e)
@@ -182,6 +182,13 @@ namespace DomZdravlja.UI
         private void dgvIzvestaji_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            FrmOuterJoin frm = new FrmOuterJoin();
+            frm.ShowDialog(); // ili .Show() ako ne želiš modalnu formu
         }
     }
 }
